@@ -1,5 +1,6 @@
 import Veterinario from "../models/Veterinario.js";
 import generarJWT from "../helpers/generarJWT.js";
+import generarId from "../helpers/generarId.js";
 const registrar = async (req, res) => {
   const { nombre, email, password } = req.body;
 
@@ -21,7 +22,8 @@ const registrar = async (req, res) => {
 };
 
 const perfil = (req, res) => {
-  res.json({ msg: "Mostrando perfil" });
+  const { veterinario } = req;
+  res.json({ perfil: veterinario });
 };
 const confirmar = async (req, res) => {
   const { token } = req.params;
@@ -55,12 +57,36 @@ const autenticar = async (req, res) => {
   //Revisar el password
   if (await usuario.comprobarPassword(password)) {
     //autenticar
-    res.json({token:generarJWT(usuario.id)})
-    
-  }else{
+    res.json({ token: generarJWT(usuario.id) });
+  } else {
     const error = new Error("El password es incorrecto");
     return res.status(403).json({ msg: error.message });
   }
 };
+const olvidePassword = async (req, res) => {
+  const { email } = req.body;
+  const exiteVeterinario = await Veterinario.findOne({ email });
+  if (!exiteVeterinario) {
+    const error = new Error("El ususario no existe");
+    return res.status(400).json({ msg: error.message });
+  }
+  try {
+    exiteVeterinario.token = generarId();
+    await exiteVeterinario.save();
+    res.json({msg:"Se ha enviado un email con las instrucciones"})
+  } catch (error) {
+    console.log(error)
+  }
+};
+const comprobarToken = (req, res) => {};
+const nuevoPassword = (req, res) => {};
 
-export { registrar, perfil, confirmar, autenticar };
+export {
+  registrar,
+  perfil,
+  confirmar,
+  autenticar,
+  olvidePassword,
+  comprobarToken,
+  nuevoPassword,
+};
