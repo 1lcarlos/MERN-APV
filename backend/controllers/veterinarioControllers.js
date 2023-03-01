@@ -73,33 +73,39 @@ const olvidePassword = async (req, res) => {
   try {
     exiteVeterinario.token = generarId();
     await exiteVeterinario.save();
-    res.json({msg:"Se ha enviado un email con las instrucciones"})
+    res.json({ msg: "Se ha enviado un email con las instrucciones" });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 const comprobarToken = async (req, res) => {
-  const {token} = req.params;
-  const tokenValido = await Veterinario.findOne({token});
+  const { token } = req.params;
+  const tokenValido = await Veterinario.findOne({ token });
   if (tokenValido) {
     //token y usuaro valido
-    res.json({msg:"Token valido y usuario existe"})
-  }else{
+    res.json({ msg: "Token valido y usuario existe" });
+  } else {
     const error = new Error("Token no valido");
-    return res.status(400).json({msg: error.message})
+    return res.status(400).json({ msg: error.message });
   }
 };
 const nuevoPassword = async (req, res) => {
-  const {token} = req.params;
-  const {password}= req.body;
+  const { token } = req.params;
+  const { password } = req.body;
 
-  const veterinario = await Veterinario.findOne({token});
+  const veterinario = await Veterinario.findOne({ token });
   if (!veterinario) {
-    const error = new Error("Se ha presentaado un error")
-    return res.status(400).json({msg:error.message});
+    const error = new Error("Se ha presentaado un error");
+    return res.status(400).json({ msg: error.message });
   }
-
-
+  try {
+    veterinario.token = null;
+    veterinario.password = password;
+    await veterinario.save();
+    return res.json({ msg: "Password modificado correctamente" });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export {
