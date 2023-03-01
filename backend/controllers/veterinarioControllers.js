@@ -78,8 +78,29 @@ const olvidePassword = async (req, res) => {
     console.log(error)
   }
 };
-const comprobarToken = (req, res) => {};
-const nuevoPassword = (req, res) => {};
+const comprobarToken = async (req, res) => {
+  const {token} = req.params;
+  const tokenValido = await Veterinario.findOne({token});
+  if (tokenValido) {
+    //token y usuaro valido
+    res.json({msg:"Token valido y usuario existe"})
+  }else{
+    const error = new Error("Token no valido");
+    return res.status(400).json({msg: error.message})
+  }
+};
+const nuevoPassword = async (req, res) => {
+  const {token} = req.params;
+  const {password}= req.body;
+
+  const veterinario = await Veterinario.findOne({token});
+  if (!veterinario) {
+    const error = new Error("Se ha presentaado un error")
+    return res.status(400).json({msg:error.message});
+  }
+
+
+};
 
 export {
   registrar,
