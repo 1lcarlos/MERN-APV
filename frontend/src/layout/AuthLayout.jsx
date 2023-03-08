@@ -2,8 +2,9 @@ import { Outlet } from "react-router-dom";
 const AuthLayout = () => {
   return (
     <>
-      <h1>Administrador de Pacientes de Veterinaria</h1>
-        <Outlet/>
+      <main className=" container mx-auto items-center md:grid md:grid-cols-2 mt-11 gap-16 p-5">
+        <Outlet />
+      </main>
     </>
   );
 };
