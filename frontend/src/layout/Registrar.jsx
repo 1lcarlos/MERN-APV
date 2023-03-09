@@ -1,10 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const Registrar = () => {
-  const [nombre,setNombre]= useState('');
-  const [email,setEmail]= useState('');
-  const [password,setPassword]= useState('');
-  const [repetirPassword,setRepetirPassword]= useState('');
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repetirPassword, setRepetirPassword] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if ([nombre, email, password, repetirPassword].includes("")) {
+      console.log("Hay campos vacios");
+      return;
+    }
+    if (password !== repetirPassword) {
+      console.log("Los password son diferentes");
+      return;
+    }
+    if (password.length < 6) {
+      console.log("EL password es muy corto, debe tener mas de 6 caracteres");
+      return;
+    }
+    console.log("Despues del if");
+  };
   return (
     <>
       <div>
@@ -14,7 +30,7 @@ const Registrar = () => {
         </h1>
       </div>
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white ">
-        <form action="">
+        <form onSubmit={handleSubmit} action="">
           <div className="my-5">
             <label
               className=" uppercase text-gray-600 block text-xl font-bold "
@@ -27,7 +43,7 @@ const Registrar = () => {
               type="text"
               placeholder="Nombre del Usuario"
               value={nombre}
-              onChange={e => setNombre(e.target.value)}
+              onChange={(e) => setNombre(e.target.value)}
             />
           </div>
           <div className="my-5">
@@ -42,7 +58,7 @@ const Registrar = () => {
               type="email"
               placeholder="Email de registro"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="my-5">
@@ -57,7 +73,7 @@ const Registrar = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="my-5">
@@ -72,7 +88,7 @@ const Registrar = () => {
               type="password"
               placeholder="Repite tu Password"
               value={repetirPassword}
-              onChange={e => setRepetirPassword(e.target.value)}
+              onChange={(e) => setRepetirPassword(e.target.value)}
             />
           </div>
           <input
@@ -83,10 +99,7 @@ const Registrar = () => {
           />
         </form>
         <nav className="mt-10 lg:flex lg:justify-around">
-          <Link
-            className="block text-center my-5 text-gray-500"
-            to="/"
-          >
+          <Link className="block text-center my-5 text-gray-500" to="/">
             ¿Ya tienes una cuenta? Inicia Sesion
           </Link>
           <Link
