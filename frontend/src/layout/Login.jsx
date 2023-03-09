@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
@@ -8,7 +8,7 @@ const Login = () => {
           <span className=" text-black"> Pacientes</span>
         </h1>
       </div>
-      <div>
+      <div className="mt-20 ">
         <form action="">
           <div className="my-5">
             <label
@@ -36,18 +36,25 @@ const Login = () => {
               placeholder="Password"
             />
           </div>
-          <input 
+          <input
             type="submit"
             value="Iniciar Sesión"
             className=" bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase
-            font-bold mt-5 hover:cursor-pointer hover:bg-indigo-900 md:w-auto " />
+            font-bold mt-5 hover:cursor-pointer hover:bg-indigo-900 md:w-auto "
+          />
         </form>
         <nav className="mt-10 lg:flex lg:justify-around">
-          <Link className="block text-center my-5 text-gray-500" to="/registrar">
-          ¿No tienes una cuenta? Registrate
+          <Link
+            className="block text-center my-5 text-gray-500"
+            to="/registrar"
+          >
+            ¿No tienes una cuenta? Registrate
           </Link>
-          <Link className="block text-center my-5 text-gray-500" to="/olvide-password">
-          Olvide mi Password
+          <Link
+            className="block text-center my-5 text-gray-500"
+            to="/olvide-password"
+          >
+            Olvide mi Password
           </Link>
         </nav>
       </div>
