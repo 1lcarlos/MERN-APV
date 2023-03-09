@@ -1,5 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 const Registrar = () => {
+  const [nombre,setNombre]= useState('');
+  const [email,setEmail]= useState('');
+  const [password,setPassword]= useState('');
+  const [repetirPassword,setRepetirPassword]= useState('');
   return (
     <>
       <div>
@@ -8,7 +13,7 @@ const Registrar = () => {
           <span className=" text-black"> Pacientes</span>
         </h1>
       </div>
-      <div className="mt-20 ">
+      <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white ">
         <form action="">
           <div className="my-5">
             <label
@@ -21,6 +26,8 @@ const Registrar = () => {
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl "
               type="text"
               placeholder="Nombre del Usuario"
+              value={nombre}
+              onChange={e => setNombre(e.target.value)}
             />
           </div>
           <div className="my-5">
@@ -34,6 +41,8 @@ const Registrar = () => {
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl "
               type="email"
               placeholder="Email de registro"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
           </div>
           <div className="my-5">
@@ -47,6 +56,8 @@ const Registrar = () => {
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl "
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
           </div>
           <div className="my-5">
@@ -60,6 +71,8 @@ const Registrar = () => {
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl "
               type="password"
               placeholder="Repite tu Password"
+              value={repetirPassword}
+              onChange={e => setRepetirPassword(e.target.value)}
             />
           </div>
           <input
