@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios"
 import Alerta from "../components/Alerta";
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
@@ -8,7 +9,7 @@ const Registrar = () => {
   const [repetirPassword, setRepetirPassword] = useState("");
   const [alerta, setAlerta] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if ([nombre, email, password, repetirPassword].includes("")) {
       setAlerta({ msg: "Hay campos vacios", error: true });
@@ -26,7 +27,13 @@ const Registrar = () => {
       return;
     }
     setAlerta({})
-    console.log("Todo esta bn");
+    try {
+      const url = "http://localhost:4000/api/veterinarios/"
+      const respuesta = await axios.post(url,{nombre, email, password})
+      console.log(respuesta)
+    } catch (error) {
+      console.log(error)
+    }
   };
   const {msg} = alerta;
   return (
