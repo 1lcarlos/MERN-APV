@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 import Alerta from "../components/Alerta";
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
@@ -26,16 +26,22 @@ const Registrar = () => {
       });
       return;
     }
-    setAlerta({})
+    setAlerta({});
     try {
-      const url = "http://localhost:4000/api/veterinarios/"
-      const respuesta = await axios.post(url,{nombre, email, password})
-      console.log(respuesta)
+      const url = "http://localhost:4000/api/veterinarios/";
+      await axios.post(url, { nombre, email, password });
+      setAlerta({
+        msg: "Creado Correctamente, revisa tu email",
+        error: false,
+      });
     } catch (error) {
-      console.log(error)
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
     }
   };
-  const {msg} = alerta;
+  const { msg } = alerta;
   return (
     <>
       <div>
