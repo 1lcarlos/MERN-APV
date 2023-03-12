@@ -4,6 +4,7 @@ import Login from "./layout/Login";
 import Registrar from "./layout/Registrar";
 import ConfirmarCuenta from "./layout/ConfirmarCuenta";
 import OlvidePassword from "./layout/OlvidePassword";
+import NuevoPassword from "./layout/NuevoPassword";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<Login />} />
           <Route path="registrar" element={<Registrar />} />
           <Route path="olvide-password" element={<OlvidePassword />} />
+          <Route path="olvide-password/:token" element={<NuevoPassword/>} />
           <Route path="confirmar-cuenta/:id" element={<ConfirmarCuenta />} />
         </Route>
       </Routes>
