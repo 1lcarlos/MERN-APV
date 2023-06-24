@@ -8,12 +8,10 @@ const predioSchema = mongoose.Schema({
   },
   frente: {
     type: Number,
-    required: true,
     trim: true,
   },
   fondo: {
     type: Number,
-    required: true,
     trim: true,
   },
   edad: {
@@ -35,12 +33,10 @@ const predioSchema = mongoose.Schema({
   },
   latitud: {
     type: Number,
-    required: true,
     trim: true,
   },
   longitud: {
     type: Number,
-    required: true,
     trim: true,
   },
   direccion: {
