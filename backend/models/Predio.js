@@ -9,22 +9,27 @@ const predioSchema = mongoose.Schema({
   frente: {
     type: Number,
     trim: true,
+    default: null
   },
   fondo: {
     type: Number,
     trim: true,
+    default: null,
   },
   edad: {
     type: Number,
     trim: true,
+    default: null,
   },
   area_terreno: {
     type: Number,    
     trim: true,
+    default: null,
   },
   area_construida: {
     type: Number,    
     trim: true,
+    default: null,
   },
   oferta: {
     type: Number,
@@ -34,10 +39,12 @@ const predioSchema = mongoose.Schema({
   latitud: {
     type: Number,
     trim: true,
+    default: null,
   },
   longitud: {
     type: Number,
     trim: true,
+    default: null,
   },
   direccion: {
     type: String,
